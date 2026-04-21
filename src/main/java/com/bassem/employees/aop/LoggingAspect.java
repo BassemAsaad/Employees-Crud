@@ -14,13 +14,13 @@ import java.util.logging.Logger;
 public class LoggingAspect {
     private Logger log = Logger.getLogger(getClass().getName());
 
-    @Pointcut("execution(* com.employees.crud.controller.*.*(..))")
+    @Pointcut("execution(* com.bassem.employees.controller.*.*(..))")
     public void controllerPackage() {}
 
-    @Pointcut("execution(* com.employees.crud.service.*.*(..))")
+    @Pointcut("execution(* com.bassem.employees.service.*.*(..))")
     public void servicePackage() {}
 
-    @Pointcut("execution(* com.employees.crud.repos.*.*(..))")
+    @Pointcut("execution(* com.bassem.employees.repos.*.*(..))")
     public void repositoryPackage() {}
 
     @Pointcut("controllerPackage() || servicePackage() || repositoryPackage()")

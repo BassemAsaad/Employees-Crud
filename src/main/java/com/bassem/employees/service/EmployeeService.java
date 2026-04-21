@@ -1,17 +1,21 @@
 package com.bassem.employees.service;
 
+import com.bassem.employees.dto.AddEmployeeRequest;
+import com.bassem.employees.dto.EmployeeResponse;
+import com.bassem.employees.dto.UpdateEmployeeRequest;
 import com.bassem.employees.entity.Employee;
 
 import java.util.List;
 
 public interface EmployeeService {
 
-    List<Employee> findAll();
+    EmployeeResponse save(AddEmployeeRequest request);
 
-    Employee findById(int theId);
+    EmployeeResponse update(UpdateEmployeeRequest request);
 
-    Employee save(Employee theEmployee);
+    List<EmployeeResponse> findAll();
 
-    void deleteById(int theId);
+    EmployeeResponse findById(int id);
 
+    void deleteById(int id);
 }
