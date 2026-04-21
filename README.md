@@ -1,219 +1,45 @@
-# Employee Management System
+# Employee Management System (REST API)
 
-A production-ready **full-stack Spring Boot CRUD application** for managing employee records.
-This project demonstrates strong backend engineering fundamentals including **layered architecture, database integration, server-side rendering, and Aspect-Oriented Programming (AOP)**.
+A production-ready Spring Boot backend application for managing employee records. This project demonstrates core backend development principles, including a robust RESTful architecture, Data Transfer Object (DTO) patterns, centralized exception handling, database integration, and Aspect-Oriented Programming (AOP). It is structured with clean code practices, utilizing distinct Service, Repository, and Controller layers to ensure maintainability and scalability.
 
-Built with clean code principles and clear separation of concerns, the application follows a maintainable **Controller → Service → Repository** architecture.
+## 🚀 Features
+* **RESTful API Architecture:** Exposes standard endpoints utilizing appropriate HTTP methods (GET, POST, PUT, DELETE) and standardized `ResponseEntity` status codes (e.g., `201 CREATED`, `204 NO CONTENT`).
+* **Data Transfer Objects (DTO):** Utilizes Java Records (`AddEmployeeRequest`, `UpdateEmployeeRequest`, `EmployeeResponse`) to decouple the database entities from the API layer, improving security and preventing over-posting.
+* **Global Exception Handling:** Employs `@ControllerAdvice` to intercept exceptions (like `EmployeeNotFoundException`) globally and return standardized JSON error responses containing timestamps, status codes, and error messages.
+* **Database Integration:** Fully integrated with MySQL using Spring Data JPA and Hibernate for robust object-relational mapping.
+* **Aspect-Oriented Programming (AOP):** Implements centralized, cross-cutting logging across the Controller, Service, and Repository packages using `@Before` and `@AfterReturning` pointcuts to trace application execution flow seamlessly.
+* **Clean Architecture:** Separation of concerns using Controller, Service (interface and implementation), and Repository layers.
 
----
+## 🛠️ Tech Stack
+* **Java:** 25
+* **Framework:** Spring Boot (Spring Web, Spring Data JPA, Spring AOP)
+* **Database:** MySQL (JDBC Connector)
+* **Data Mapping:** Java Records for DTOs
 
-## Overview
-
-This project allows users to perform complete employee management operations through a responsive web interface.
-It is designed as a real-world Spring Boot application that showcases:
-
-* Clean layered architecture
-* Enterprise-ready CRUD workflows
-* Server-side rendered UI with Thymeleaf
-* Persistent storage with MySQL
-* Cross-cutting logging using AOP
-
----
-
-## Features
-
-* **Full CRUD Operations**
-  Create, view, update, and delete employee records.
-
-* **Responsive UI**
-  Built with **Thymeleaf** and **Bootstrap 5** for a clean and user-friendly experience.
-
-* **Database Persistence**
-  Uses **Spring Data JPA + Hibernate** for ORM and seamless MySQL integration.
-
-* **Centralized Logging with AOP**
-  Logs execution flow across controller, service, and repository layers.
-
-* **Clean Architecture**
-  Organized into controller, service, repository, and AOP layers.
-
----
-
-## Tech Stack
-
-| Layer      | Technology                    |
-| ---------- | ----------------------------- |
-| Language   | Java 25                       |
-| Framework  | Spring Boot 4                 |
-| Backend    | Spring Web, Spring Data JPA   |
-| ORM        | Hibernate                     |
-| AOP        | Spring AOP                    |
-| Frontend   | Thymeleaf, HTML5, Bootstrap 5 |
-| Database   | MySQL                         |
-| Build Tool | Maven                         |
-
----
-
-## Project Architecture
-
-```text
-Controller
-   ↓
-Service Interface
-   ↓
-Service Implementation
-   ↓
-Repository (JPA)
-   ↓
-MySQL Database
-```
-
-This layered approach improves:
-
-* maintainability
-* testability
-* scalability
-* separation of concerns
-
----
-
-## Getting Started
-
-### Prerequisites
-
-Make sure you have the following installed:
-
-* JDK 25+
+## 📋 Prerequisites
+Before running the project, ensure you have the following installed:
+* Java Development Kit (JDK) 25 or higher
 * Maven
-* MySQL Server
+* MySQL Server (running on default port `3306`)
 
----
+## ⚙️ Getting Started
 
-## Database Setup
-
-Run the following SQL script:
+### 1. Database Initialization
+Create the necessary database and table using the provided SQL script. You can execute this in your MySQL Workbench or command line:
 
 ```sql
-CREATE DATABASE IF NOT EXISTS employee_directory;
-USE employee_directory;
+CREATE DATABASE IF NOT EXISTS `employee_directory`;
+USE `employee_directory`;
 
-CREATE TABLE employee (
-    id INT NOT NULL AUTO_INCREMENT,
-    first_name VARCHAR(45),
-    last_name VARCHAR(45),
-    email VARCHAR(45),
-    PRIMARY KEY (id)
-);
+CREATE TABLE `employee` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(45) DEFAULT NULL,
+  `last_name` varchar(45) DEFAULT NULL,
+  `email` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO employee VALUES
-(1, 'Leslie', 'Andrews', 'leslie@luv2code.com'),
-(2, 'Emma', 'Baumgarten', 'emma@luv2code.com');
-```
-
----
-
-## Configuration
-
-Update your `application.properties` file:
-
-```properties
-spring.datasource.url=jdbc:mysql://localhost:3306/employee_directory
-spring.datasource.username=your_username
-spring.datasource.password=your_password
-```
-
----
-
-## Run the Application
-
-```bash
-mvn spring-boot:run
-```
-
-The application runs at:
-
-```text
-http://localhost:8080
-```
-
----
-
-## API / Web Routes
-
-| Method | Endpoint                      | Description                     |
-| ------ | ----------------------------- | ------------------------------- |
-| GET    | `/`                           | Redirects to employee dashboard |
-| GET    | `/api/employees/list`         | List all employees              |
-| GET    | `/api/employees/add`          | Show add employee form          |
-| POST   | `/api/employees/add`          | Save new employee               |
-| GET    | `/api/employees/edit?id={id}` | Show edit form                  |
-| POST   | `/api/employees/edit`         | Update employee                 |
-| POST   | `/api/employees/delete`       | Delete employee                 |
-
----
-
-## Project Structure
-
-```text
-src/main/java
-├── controller
-│   └── EmployeeController.java
-├── service
-│   ├── EmployeeService.java
-│   └── EmployeeServiceImpl.java
-├── repository
-│   └── EmployeeRepository.java
-├── aop
-│   └── LoggingAspect.java
-└── entity
-    └── Employee.java
-```
-
----
-
-## Key Learning Highlights
-
-This project demonstrates practical experience with:
-
-* Spring MVC request handling
-* Thymeleaf server-side rendering
-* JPA entity mapping
-* Hibernate ORM
-* layered architecture
-* AOP logging
-* production-style code organization
-
----
-
-## Why This Project Matters
-
-This is more than a simple CRUD app.
-It reflects **real backend engineering practices** commonly used in enterprise Spring Boot applications.
-
-It is especially useful for showcasing:
-
-* Java backend fundamentals
-* clean architecture understanding
-* Spring ecosystem knowledge
-* job-ready project structure
-
----
-
-## Future Improvements
-
-Potential enhancements:
-
-* Spring Security authentication & authorization
-* REST API version
-* Docker containerization
-* unit and integration testing
-* pagination and search
-* audit logging
-* role-based access control
-
----
-
-## Author
-
-**Bassem**
-Java Backend Developer | Spring Boot Enthusiast
+-- Optional: Insert sample data
+INSERT INTO `employee` VALUES 
+    (1,'Leslie','Andrews','leslie@luv2code.com'),
+    (2,'Emma','Baumgarten','emma@luv2code.com');
